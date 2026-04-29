@@ -19,8 +19,6 @@ app.post('/login', function(req, res){
 
     if(user.password === req.body.password){ // if password is the correct password
         res.json({ success: true, message: 'User authentication successful.'}); // send a response that the authentication was successful
-        CURRENT_USER = user;
-        console.log(CURRENT_USER);
     }
     else {                                   // otherwise
         res.json({ success: false, message: 'Incorrect password.' }); // send a response that the authentication was unsuccessful
@@ -45,7 +43,7 @@ app.post('/register', function(req, res){
     };
 
     // update the credentials.json file with the new credentials object containing the new user
-    fs.writeFile('./data/credentials.json', JSON.stringify(credentials), 'utf-8', function(err){
+    fs.writeFile('./data/credentials.json', JSON.stringify(credentials, null, 4), 'utf-8', function(err){
         if(err) console.log(error);
         else console.log('Credentials saved to data/credentials.json');
     })
